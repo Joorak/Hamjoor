@@ -1,0 +1,35 @@
+﻿@page "/"
+@using System.Timers
+@implements IDisposable
+@inject MatchGameModel game
+
+<div class="container p-3">
+    <div class="animals row">
+        @foreach (var card in game.ShuffledCards)
+        {
+            <div class="col-4 col-md-3  game-card @card.CssClass" @onclick="@(() => game.SelectCardAsync(card))">
+                <span class="card-text">@card.Animal</span>
+            </div>
+        }
+    </div>
+    <div class="d-flex flex-column">
+        <h2 class="mx-auto">Matches found: @game.MatchesFound</h2>
+        <h3 class="mx-auto">Time: @game.GameTimeElapsed.TotalSeconds.ToString("0.0s")</h3>
+
+        @if (game.GameEnded)
+        {
+            <button class="btn btn-primary btn-lg mx-auto" @onclick="game.ResetGame">Play again</button>
+        }
+        else if (game.LatestCompletionTime.HasValue)
+        {
+            <p class ="mx-auto">Previous time: @game.LatestCompletionTime.Value.ToString("0.0s")</p>
+        }
+    </div>
+</div>
+
+@code {
+    // Subscribe and respond to the timer
+    protected override void OnInitialized() => game.TimerElapsed += OnTimerTick!;
+    void OnTimerTick(object sender, ElapsedEventArgs args) => InvokeAsync(StateHasChanged);
+    void IDisposable.Dispose() => game.TimerElapsed -= OnTimerTick!;
+}
