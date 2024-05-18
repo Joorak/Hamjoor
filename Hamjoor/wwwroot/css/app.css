@@ -83,7 +83,9 @@ code {
 .container {
     max-width: 991px !important;
     font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif ;
+    font-size:14px;
     position: relative;
+    min-height:100vh;
 }
 
 .animals.row {
