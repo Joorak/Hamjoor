@@ -81,8 +81,9 @@ code {
 
 /*app custom css*/
 .container {
-     max-width: 991px !important;
-    font-family: Calibri, 'Gill Sans', 'Gill Sans MT', 'Trebuchet MS', sans-serif position: relative;
+    max-width: 991px !important;
+    font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif ;
+    position: relative;
 }
 
 .animals.row {
